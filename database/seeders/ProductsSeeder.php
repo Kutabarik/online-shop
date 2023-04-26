@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Products;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,9 @@ class ProductsSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Products::factory()
+            ->count(20)
+            ->hasProductCategories(1)
+            ->create();
     }
 }
