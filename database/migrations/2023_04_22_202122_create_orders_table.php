@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('product_id');
             $table->string('city', 255);
             $table->string('street', 255);
             $table->decimal('total', 10, 2);
@@ -25,7 +24,6 @@ return new class extends Migration
             $table->timestamp('updated_at')->useCurrent();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

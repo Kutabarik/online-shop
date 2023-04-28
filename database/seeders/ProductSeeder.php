@@ -2,20 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\Products;
+use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProductsSeeder extends Seeder
+class ProductSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Products::factory()
-            ->count(20)
-            ->hasProductCategories(1)
+        Product::factory()
+            ->count(30)
+            ->hasOrders(10)
             ->create();
     }
 }

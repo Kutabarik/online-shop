@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\V1;
 
-use App\Models\Product_categories;
-use App\Http\Requests\StoreProduct_categoriesRequest;
-use App\Http\Requests\UpdateProduct_categoriesRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductsRequest;
+use App\Http\Requests\UpdateProductsRequest;
+use App\Models\Product;
 
-class ProductCategoriesController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class ProductCategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProduct_categoriesRequest $request)
+    public function store(StoreProductsRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class ProductCategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product_categories $product_categories)
+    public function show(Product $products)
     {
         //
     }
@@ -43,7 +44,7 @@ class ProductCategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product_categories $product_categories)
+    public function edit(Product $products)
     {
         //
     }
@@ -51,7 +52,7 @@ class ProductCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProduct_categoriesRequest $request, Product_categories $product_categories)
+    public function update(UpdateProductsRequest $request, Product $products)
     {
         //
     }
@@ -59,7 +60,7 @@ class ProductCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product_categories $product_categories)
+    public function destroy(Product $products)
     {
         //
     }

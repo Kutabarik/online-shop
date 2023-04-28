@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Products;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +22,6 @@ class OrderFactory extends Factory
 
         return [
             'user_id' => User::factory(),
-            'product_id' => Products::factory(),
             'city' => fake()->city(),
             'street' => fake()->streetAddress(),
             'total' => fake()->numberBetween(10, 100000),
