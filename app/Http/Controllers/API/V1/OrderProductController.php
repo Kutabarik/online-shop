@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\V1;
 
-use App\Models\Order_product;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrder_productRequest;
 use App\Http\Requests\UpdateOrder_productRequest;
+use App\Models\Order_product;
 
 class OrderProductController extends Controller
 {

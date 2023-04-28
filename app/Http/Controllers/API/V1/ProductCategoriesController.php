@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProduct_categoriesRequest;
 use App\Http\Requests\UpdateProduct_categoriesRequest;
+use App\Http\Resources\V1\ProductCategoriesCollection;
+use App\Http\Resources\V1\ProductCategoriesResource;
 use App\Models\Product_categories;
 
 class ProductCategoriesController extends Controller
@@ -14,7 +16,7 @@ class ProductCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        return new ProductCategoriesCollection(Product_categories::paginate());
     }
 
     /**
@@ -36,15 +38,15 @@ class ProductCategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product_categories $product_categories)
+    public function show(Product_categories $category)
     {
-        //
+        return new ProductCategoriesResource($category);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product_categories $product_categories)
+    public function edit(Product_categories $category)
     {
         //
     }
@@ -52,7 +54,7 @@ class ProductCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProduct_categoriesRequest $request, Product_categories $product_categories)
+    public function update(UpdateProduct_categoriesRequest $request, Product_categories $category)
     {
         //
     }
@@ -60,7 +62,7 @@ class ProductCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product_categories $product_categories)
+    public function destroy(Product_categories $category)
     {
         //
     }

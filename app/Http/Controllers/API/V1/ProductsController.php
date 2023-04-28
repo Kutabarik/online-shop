@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductsRequest;
 use App\Http\Requests\UpdateProductsRequest;
+use App\Http\Resources\V1\ProductCollection;
+use App\Http\Resources\V1\ProductResource;
 use App\Models\Product;
 
 class ProductsController extends Controller
@@ -14,7 +16,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        return new ProductCollection(Product::paginate());
     }
 
     /**
@@ -36,15 +38,15 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $products)
+    public function show(Product $product)
     {
-        //
+        return new ProductResource($product);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $products)
+    public function edit(Product $product)
     {
         //
     }
@@ -52,7 +54,7 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductsRequest $request, Product $products)
+    public function update(UpdateProductsRequest $request, Product $product)
     {
         //
     }
@@ -60,7 +62,7 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $products)
+    public function destroy(Product $product)
     {
         //
     }
