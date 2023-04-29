@@ -8,15 +8,26 @@ use App\Http\Requests\UpdateProductsRequest;
 use App\Http\Resources\V1\ProductCollection;
 use App\Http\Resources\V1\ProductResource;
 use App\Models\Product;
+use App\Filters\V1\ProductsFilter;
+use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new ProductCollection(Product::paginate());
+        $filter = new ProductsFilter();
+        $queryItems = $filter->transform($request); //['column', 'operator', 'value']
+
+        if (count($queryItems) === 0){
+            return new ProductCollection(Product::paginate());
+        } else {
+            $products = Product::where($queryItems)->paginate();
+
+            return new ProductCollection($products->appends($request->query()));
+        }
     }
 
     /**
