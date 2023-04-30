@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\Filters\V1\CategoriesFilter;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProduct_categoriesRequest;
 use App\Http\Requests\UpdateProduct_categoriesRequest;
@@ -14,9 +16,18 @@ class ProductCategoriesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new ProductCategoriesCollection(Product_categories::paginate());
+        $filter = new CategoriesFilter();
+        $queryItems = $filter->transform($request);
+
+        if (count($queryItems) === 0){
+            return new ProductCategoriesCollection(Product_categories::paginate());
+        } else {
+            $orders = Product_categories::where($queryItems)->paginate();
+
+            return new ProductCategoriesCollection($orders->appends($request->query()));
+        }
     }
 
     /**

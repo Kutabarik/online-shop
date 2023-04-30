@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use Illuminate\Http\Request;
+use App\Filters\V1\UsersFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -14,9 +16,18 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new UserCollection(User::paginate());
+        $filter = new UsersFilter();
+        $queryItems = $filter->transform($request);
+
+        if (count($queryItems) === 0) {
+            return new UserCollection(User::paginate());
+        } else {
+            $orders = User::where($queryItems)->paginate();
+
+            return new UserCollection($orders->appends($request->query()));
+        }
     }
 
     /**
