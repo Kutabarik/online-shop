@@ -19,12 +19,12 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         $filter = new ProductsFilter();
-        $queryItems = $filter->transform($request); //['column', 'operator', 'value']
+        $filterItems = $filter->transform($request); //['column', 'operator', 'value']
 
-        if (count($queryItems) === 0){
+        if (count($filterItems) === 0){
             return new ProductCollection(Product::paginate());
         } else {
-            $products = Product::where($queryItems)->paginate();
+            $products = Product::where($filterItems)->paginate();
 
             return new ProductCollection($products->appends($request->query()));
         }
@@ -43,7 +43,9 @@ class ProductsController extends Controller
      */
     public function store(StoreProductsRequest $request)
     {
-        //
+        $product = Product::create($request->validated());
+
+        return response()->json($product, 201);
     }
 
     /**

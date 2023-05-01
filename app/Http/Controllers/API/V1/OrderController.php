@@ -19,12 +19,12 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $filter = new OrdersFilter();
-        $queryItems = $filter->transform($request);
+        $filterItems = $filter->transform($request);
 
-        if (count($queryItems) === 0){
+        if (count($filterItems) === 0){
             return new OrderCollection(Order::paginate());
         } else {
-            $orders = Order::where($queryItems)->paginate();
+            $orders = Order::where($filterItems)->paginate();
 
             return new OrderCollection($orders->appends($request->query()));
         }
@@ -43,7 +43,9 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        $order = Order::create($request->validated());
+
+        return response()->json($order, 201);
     }
 
     /**

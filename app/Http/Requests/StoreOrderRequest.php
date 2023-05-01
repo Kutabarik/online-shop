@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreOrderRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,13 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'user_id' => ['required', 'integer', 'exists:users,id'],
+            'city' => ['required', 'string', 'max:100'],
+            'street' => ['required', 'string', 'max:100'],
+            'total' => ['required', 'numeric', 'min:0'],
+            'status' => ['required', 'string', Rule::in(['billed', 'paid', 'void'])],
+            'billed_date' => ['required', 'date'],
+            'paid_date' => ['nullable', 'date'],
         ];
     }
 }

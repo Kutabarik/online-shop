@@ -19,15 +19,17 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $filter = new UsersFilter();
-        $queryItems = $filter->transform($request);
+        $filterItems = $filter->transform($request);
 
-        if (count($queryItems) === 0) {
-            return new UserCollection(User::paginate());
-        } else {
-            $orders = User::where($queryItems)->paginate();
+        $includeOrders = $request->query('includeOrders');
 
-            return new UserCollection($orders->appends($request->query()));
+        $users = User::where($filterItems);
+
+        if ($includeOrders) {
+            $users = $users->with('orders');
         }
+
+        return new UserCollection($users->paginate()->appends($request->query()));
     }
 
     /**
@@ -43,7 +45,9 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        $user = User::create($request->validated());
+
+        return response()->json($user, 201);
     }
 
     /**
@@ -51,6 +55,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $includeOrders = request()->query('includeOrders');
+
+        if ($includeOrders){
+            return new UserResource($user->loadMissing('orders'));
+        }
+
         return new UserResource($user);
     }
 

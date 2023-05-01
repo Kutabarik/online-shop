@@ -19,14 +19,14 @@ class ProductCategoriesController extends Controller
     public function index(Request $request)
     {
         $filter = new CategoriesFilter();
-        $queryItems = $filter->transform($request);
+        $filterItems = $filter->transform($request);
 
-        if (count($queryItems) === 0){
+        if (count($filterItems) === 0){
             return new ProductCategoriesCollection(Product_categories::paginate());
         } else {
-            $orders = Product_categories::where($queryItems)->paginate();
+            $categories = Product_categories::where($filterItems)->paginate();
 
-            return new ProductCategoriesCollection($orders->appends($request->query()));
+            return new ProductCategoriesCollection($categories->appends($request->query()));
         }
     }
 
