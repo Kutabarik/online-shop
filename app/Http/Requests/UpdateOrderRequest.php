@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateOrderRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,28 @@ class UpdateOrderRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+        if ($method === 'PUT') {
+            return [
+                'user_id' => ['required', 'integer', 'exists:users,id'],
+                'city' => ['required', 'string', 'max:100'],
+                'street' => ['required', 'string', 'max:100'],
+                'total' => ['required', 'numeric', 'min:0'],
+                'status' => ['required', 'string', Rule::in(['billed', 'paid', 'void'])],
+                'billed_date' => ['required', 'date'],
+                'paid_date' => ['nullable', 'date'],
+            ];
+        } else {
+            return [
+                'user_id' => ['sometimes', 'required', 'integer', 'exists:users,id'],
+                'city' => ['sometimes', 'required', 'string', 'max:100'],
+                'street' => ['sometimes', 'required', 'string', 'max:100'],
+                'total' => ['sometimes', 'required', 'numeric', 'min:0'],
+                'status' => ['sometimes', 'required', 'string', Rule::in(['billed', 'paid', 'void'])],
+                'billed_date' => ['sometimes', 'required', 'date'],
+                'paid_date' => ['sometimes', 'nullable', 'date'],
+            ];
+        }
     }
 }

@@ -69,7 +69,7 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductsRequest $request, Product $product)
     {
-        //
+        $product->update($request->all());
     }
 
     /**

@@ -11,7 +11,7 @@ class UpdateProductsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,24 @@ class UpdateProductsRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+        if ($method === 'PUT') {
+            return [
+                'category_id' => ['required', 'exists:product_categories,id'],
+                'name' => ['required', 'string', 'max:100'],
+                'description' => ['required', 'string'],
+                'price' => ['required', 'numeric', 'min:0'],
+                'img' => ['required', 'url'],
+            ];
+        } else {
+            return [
+                'category_id' => ['sometimes', 'required', 'exists:product_categories,id'],
+                'name' => ['sometimes', 'required', 'string', 'max:100'],
+                'description' => ['sometimes', 'required', 'string'],
+                'price' => ['sometimes', 'required', 'numeric', 'min:0'],
+                'img' => ['sometimes', 'required', 'url'],
+            ];
+        }
     }
 }
