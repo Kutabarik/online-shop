@@ -77,6 +77,8 @@ class ProductsController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return response()->json(null, 204);
     }
 }
