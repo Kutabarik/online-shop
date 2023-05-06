@@ -2,6 +2,7 @@
 
 body {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  box-sizing: border-box;
 }
 
 .App {
@@ -47,10 +48,81 @@ h1 {
   font-weight: 700;
 }
 
+h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
 // boostrap components
 .carousel-item img {
   object-fit: cover;
   object-position: center;
   height: 40em;
   overflow: hidden;
+}
+
+[role="navigation"] {
+  display: flex !important;
+  flex-direction: row;
+
+  li {
+    list-style: none;
+    margin-left: 20px;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    [aria-current="page"] {
+      background-color: #2353d0;
+      color: white;
+    }
+
+    [role="button"] {
+      font-size: 1.2rem;
+      padding: 10px 20px 10px 20px;
+      display: inline-block;
+      line-height: 1.2rem;
+      border: 1px solid #2353d0;
+
+      &:hover {
+        background-color: #2353d0;
+        color: white;
+
+      }
+    }
+  }
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.badge1 {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #de7e7e;
+  padding: 1px 8px 1px 8px;
+  border-radius: 100%;
+}
+
+.add-button {
+  color: #0275d8;
+  background-color: white;
+  border: 1px solid white;
+  padding: 15px 10px;
+  line-height: 0;
+  border-radius: 20px;
+  &:first-child {
+    margin-right: 10px;
+  }
+  &:last-child {
+    margin-left: 10px;
+  }
+  &:hover {
+    color: white;
+    border: 1px solid white;
+  }
 }

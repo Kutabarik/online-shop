@@ -8,7 +8,8 @@ const initialState = {
         currentPage: 1,
         from: 1,
         lastPage: null
-    }
+    },
+    status: "loading"
 }
 
 const ProductSlice = createSlice({
@@ -18,14 +19,16 @@ const ProductSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
             state.items = action.payload.data;
-            const { total, currentPage, from, lastPage } = action.payload.meta;
             state.meta = action.payload.meta;
+            state.status = "fulfilled"
         });
         builder.addCase(fetchProducts.pending, (state) => {
             state.items = [];
+            state.status = "loading"
         });
         builder.addCase(fetchProducts.rejected, (state) => {
             state.items = [];
+            state.status = "error"
         })
     }
 })
