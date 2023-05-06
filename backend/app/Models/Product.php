@@ -17,8 +17,12 @@ class Product extends Model
         'img',
     ];
 
-
     public function orders(){
         return $this->belongsToMany(Order::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Product_categories::class);
     }
 }

@@ -21,13 +21,9 @@ class ProductsController extends Controller
         $filter = new ProductsFilter();
         $filterItems = $filter->transform($request); //['column', 'operator', 'value']
 
-        if (count($filterItems) === 0){
-            return new ProductCollection(Product::paginate());
-        } else {
-            $products = Product::where($filterItems)->paginate();
+        $products = Product::where($filterItems);
 
-            return new ProductCollection($products->appends($request->query()));
-        }
+        return new ProductCollection($products->paginate()->appends($request->query()));
     }
 
     /**
