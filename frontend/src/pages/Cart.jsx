@@ -37,7 +37,10 @@ const Cart = () => {
 
     if (cart.length === 0) {
         return (
-            <div>Cart is empty :(</div>
+            <div style={{textAlign: "center", marginTop: 20}}>
+                <h4>Cart is empty 😔</h4>
+                <p>You can add some products...</p>
+            </div>
         )
     }
 
@@ -54,9 +57,6 @@ const Cart = () => {
                         <div className="ms-2 me-auto">
                             <div className="fw-bold">{item.name}</div>
                             {Number(item.price * item.count).toFixed(2)}$
-                            {/*<div>*/}
-
-                            {/*</div>*/}
                         </div>
                         <Badge bg="primary" pill>
                             <Button variant="outline-primary" className="add-button"

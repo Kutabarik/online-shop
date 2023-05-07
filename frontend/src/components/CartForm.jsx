@@ -1,5 +1,5 @@
 import React from "react";
-import {set, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Button, Form} from "react-bootstrap";
 import * as yup from 'yup';
@@ -7,7 +7,9 @@ import getAddressArray from "../utils/getAddressArray";
 import moment from "moment";
 import orderApi from "../api/order.api";
 import 'react-toastify/dist/ReactToastify.css';
-import {toastError, toastPromise, toastSuccess, toastWarning} from "../utils/toast-generator";
+import {toastError, toastPromise} from "../utils/toast-generator";
+import {useDispatch} from "react-redux";
+import {removeAllItems} from "../redux/cart/cart.slice";
 
 const schema = yup.object({
     address: yup.string().matches(/.{3,20}/, {
@@ -22,13 +24,15 @@ const CartForm = () => {
     const [addresses, setAddresses] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState("none");
 
+    const dispatch = useDispatch();
+
     const {
         register,
         handleSubmit,
         setError,
         reset,
         watch,
-        formState: {errors, isValid},
+        formState: {errors},
     } = useForm({
         mode: 'onChange',
         defaultValues: {
@@ -74,7 +78,7 @@ const CartForm = () => {
     }
 
     const onSubmit = (data) => {
-        if (watchIsMyAddress && !data?.extraAddress || !watchIsMyAddress && !data.address) {
+        if ((watchIsMyAddress && !data?.extraAddress) || (!watchIsMyAddress && !data.address)) {
             setError('addressError', {
                 type: "address",
                 message: "You need to enter address",
@@ -92,7 +96,8 @@ const CartForm = () => {
         }
 
         toastPromise(orderApi.createOrder(order), "Your order successfully registered", "You have some Errors", "You order is proceed")
-            .then(() => {
+            .then((obj) => {
+                dispatch(removeAllItems())
                 resetForm();
             })
             .catch(err => {

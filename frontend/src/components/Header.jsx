@@ -15,19 +15,8 @@ const Header = () => {
                 <Navbar.Brand href="#home">Online-Shop</Navbar.Brand>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto align-items-center">
-                        <Nav.Item><Link to="/" style={{textDecoration: "none", color: "black"}}>Home</Link></Nav.Item>
-                        <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider/>
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
-                            </NavDropdown.Item>
-                        </NavDropdown>
+                        <Nav.Item><Link to="/" style={{textDecoration: "none", color: "black", marginRight: "20px"}}>Home</Link></Nav.Item>
+                        <Nav.Item><Link to="/products" style={{textDecoration: "none", color: "black"}}>Products</Link></Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Brand>
@@ -35,7 +24,7 @@ const Header = () => {
                         <Button variant="primary" className="position-relative">
                             Cart
                             {totalCount !== 0 && (
-                                <div className="badge1">{totalCount}</div>
+                                <div className="badge1" style={{lineHeight: 0}}>{totalCount}</div>
                             )}
                         </Button>
                     </Link>

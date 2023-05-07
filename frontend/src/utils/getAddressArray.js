@@ -1,4 +1,4 @@
-import maps from "../api/maps";
+import maps from "../api/maps.api";
 
 const getAddressArray = async (latitude, longitude) => {
     try {

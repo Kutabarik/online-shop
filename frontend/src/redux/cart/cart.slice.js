@@ -37,10 +37,17 @@ const CartSlice = createSlice({
         removeItem: (state, action) => {
             state.items = state.items.filter(item => item.id !== action.payload.id);
             state.totalPrice = calcTotalPrice(state.items);
+        },
+
+        removeAllItems: (state) => {
+            localStorage.removeItem("cart");
+            state.items.length = 0;
+            state.totalPrice = 0;
+            console.log(state)
         }
     }
 })
 
-export const {addProduct, minusItem, removeItem} = CartSlice.actions;
+export const {addProduct, minusItem, removeItem, removeAllItems} = CartSlice.actions;
 
 export default CartSlice.reducer;
