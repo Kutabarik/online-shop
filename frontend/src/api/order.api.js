@@ -8,5 +8,9 @@ export default {
      */
     createOrder: (orderInfo) => {
         return api.post("orders", orderInfo);
+    },
+
+    getById: (id) => {
+        return api.get(`orders/${id}`);
     }
 }

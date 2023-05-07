@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import Cart from "./pages/Cart";
 import {ToastContainer} from "react-toastify";
 import React from "react";
+import Track from "./pages/Track";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
                     <Route path="" element={<Home/>}/>
                     <Route path="/products" element={<Products/>}/>
                     <Route path="/cart" element={<Cart/>}/>
+                    <Route path="/track" element={<Track/>}/>
                 </Route>
             </Routes>
         </>

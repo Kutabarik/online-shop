@@ -2,9 +2,12 @@ import React from "react";
 import {Button, Card} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {addProduct} from "../redux/cart/cart.slice";
+import {toastSuccess} from "../utils/toast-generator";
 
 const ProductBlock = ({id, name, description, price, img, category}) => {
     const dispatch = useDispatch();
+
+    const toastId = React.useRef();
 
     const onClickAdd = () => {
         const item = {
@@ -14,6 +17,7 @@ const ProductBlock = ({id, name, description, price, img, category}) => {
             img,
             category,
         }
+        toastSuccess(`${item.name} successfully added to card`, 1000);
         dispatch(addProduct(item));
     }
 
@@ -29,7 +33,7 @@ const ProductBlock = ({id, name, description, price, img, category}) => {
                 <Card.Text>
                     <span className="text-bold">{price}$</span>
                 </Card.Text>
-                <hr />
+                <hr/>
                 <Button onClick={onClickAdd} variant="outline-primary">Add To Cart</Button>
             </Card.Body>
         </Card>

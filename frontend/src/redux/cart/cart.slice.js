@@ -43,7 +43,6 @@ const CartSlice = createSlice({
             localStorage.removeItem("cart");
             state.items.length = 0;
             state.totalPrice = 0;
-            console.log(state)
         }
     }
 })

@@ -11,9 +11,9 @@ const Home = () => {
         <div className="mt-4">
             <section>
                 <h1 className="text-center mb-5">Our Products</h1>
-                <ProductList isPagination={false} />
+                <ProductList isPagination={true} />
                 <Link to="/products">
-                    <Button variant="outline-primary">More Products...</Button>
+                    <Button variant="outline-primary">Products by Category...</Button>
                 </Link>
             </section>
         </div>

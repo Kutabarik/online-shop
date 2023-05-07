@@ -8,8 +8,10 @@ import moment from "moment";
 import orderApi from "../api/order.api";
 import 'react-toastify/dist/ReactToastify.css';
 import {toastError, toastPromise} from "../utils/toast-generator";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {removeAllItems} from "../redux/cart/cart.slice";
+import {getCart} from "../redux/cart/cart.selector";
+import {updateLocalStorageArray} from "../utils/updateLocalStorageArray";
 
 const schema = yup.object({
     address: yup.string().matches(/.{3,20}/, {
@@ -25,6 +27,7 @@ const CartForm = () => {
     const [isLoading, setIsLoading] = React.useState("none");
 
     const dispatch = useDispatch();
+    const cart = useSelector(getCart);
 
     const {
         register,
@@ -88,16 +91,26 @@ const CartForm = () => {
 
         const address = watchIsMyAddress ? `${data.extraAddress} ${data.extraAddressStr}` : data.address;
 
+        const newCart = cart.map(item => ({
+            id: item.id,
+            name: item.name,
+            count: item.count,
+            price: item.price,
+            category: item.category,
+        }))
+
         const order = {
             "name": data.userName,
             "street": address,
             "status": "void",
-            "billed_date": moment().format("yyyy-MM-DD"),
+            "billed_date": moment().format("yyyy-MM-DD hh:mm:ss"),
+            "products": JSON.stringify(newCart)
         }
 
         toastPromise(orderApi.createOrder(order), "Your order successfully registered", "You have some Errors", "You order is proceed")
-            .then((obj) => {
-                dispatch(removeAllItems())
+            .then((res) => {
+                dispatch(removeAllItems());
+                updateLocalStorageArray("tracks", res.data.id);
                 resetForm();
             })
             .catch(err => {

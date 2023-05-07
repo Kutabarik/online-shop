@@ -13,9 +13,10 @@ const Products = () => {
                 onSelect={(k) => setKey(k)}
                 className="mb-3"
             >
-                <Tab eventKey={"1"} title="vitae"/>
-                <Tab eventKey={"2"} title="est"/>
-                <Tab eventKey={"3"} title="illum"/>
+                <Tab eventKey={"1"} title="Products"/>
+                <Tab eventKey={"2"} title="Electronics"/>
+                <Tab eventKey={"3"} title="Clothing and footwear"/>
+                <Tab eventKey={"4"} title="Home goods"/>
             </Tabs>
 
             <ProductList isPagination={true} categoryId={Number(key)}/>

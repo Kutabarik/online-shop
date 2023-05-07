@@ -1,9 +1,10 @@
 import {toast} from "react-toastify";
 
-export const toastSuccess = (message) => {
+export const toastSuccess = (message, time = 5000, id = 'toast', container = "Main") => {
     return toast.success(`🦄 ${message}`, {
+        containerId: container,
         position: "top-center",
-        autoClose: 5000,
+        autoClose: time,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -13,8 +14,9 @@ export const toastSuccess = (message) => {
     });
 }
 
-export const toastWarning = (message) => {
+export const toastWarning = (message, container = "Main") => {
     return toast.warn(message, {
+        containerId: container,
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -26,8 +28,9 @@ export const toastWarning = (message) => {
     });
 }
 
-export const toastError = (message) => {
+export const toastError = (message, container = "Main") => {
     return toast.error(message, {
+        containerId: "Main",
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
