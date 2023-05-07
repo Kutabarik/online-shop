@@ -24,7 +24,6 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'user_id' => ['required', 'integer', 'exists:users,id'],
-            'city' => ['required', 'string', 'max:100'],
             'street' => ['required', 'string', 'max:100'],
             'total' => ['required', 'numeric', 'min:0'],
             'status' => ['required', 'string', Rule::in(['billed', 'paid', 'void'])],

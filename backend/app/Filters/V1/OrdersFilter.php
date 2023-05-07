@@ -9,7 +9,6 @@ class OrdersFilter extends ApiFilter
 {
     protected $safeParms = [
         'userId' => ['eq'],
-        'city' => ['eq'],
         'street' => ['eq'],
         'total' => ['eq', 'gt', 'gte', 'lt', 'lte'],
         'status' => ['eq', 'ne'],

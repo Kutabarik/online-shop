@@ -22,7 +22,6 @@ class OrderFactory extends Factory
 
         return [
             'user_id' => User::factory(),
-            'city' => fake()->city(),
             'street' => fake()->streetAddress(),
             'total' => fake()->numberBetween(10, 100000),
             'status' => $status,
