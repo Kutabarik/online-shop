@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id', 15)->primary();
             $table->string('name');
             $table->string('street', 255);
             $table->string('status')->default('billed');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->dateTime('paid_date')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
-            $table->json('products')->default("{}");
+            $table->json('products')->default("[]");
         });
     }
 

@@ -15,12 +15,12 @@ class OrderResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
             'name' => $this->name,
             'street' => $this->street,
             'status' => $this->status,
             'billedDate' => $this->billed_date,
-            'paidDate' => $this->paid_date
+            'paidDate' => $this->paid_date,
+            'products' => $this->products,
         ];
     }
 }

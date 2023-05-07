@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'name',
@@ -15,10 +16,6 @@ class Order extends Model
         'status',
         'billed_date',
         'paid_date',
+        'products',
     ];
-
-    public function product()
-    {
-        return $this->belongsToMany(Product::class);
-    }
 }

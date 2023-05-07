@@ -26,6 +26,7 @@ class OrderFactory extends Factory
             'status' => $status,
             'billed_date' => fake()->dateTimeThisDecade(),
             'paid_date' => $status === 'paid' ? fake()->dateTimeThisDecade() : NULL,
+            'products' => json_encode([])
         ];
     }
 }

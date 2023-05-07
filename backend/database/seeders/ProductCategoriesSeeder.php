@@ -14,7 +14,7 @@ class ProductCategoriesSeeder extends Seeder
     public function run(): void
     {
         Product_categories::factory()
-            ->count(10)
+            ->count(4)
             ->create();
     }
 }

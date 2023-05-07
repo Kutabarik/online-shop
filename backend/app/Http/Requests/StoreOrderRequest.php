@@ -28,6 +28,7 @@ class StoreOrderRequest extends FormRequest
             'status' => ['required', 'string', Rule::in(['billed', 'paid', 'void'])],
             'billed_date' => ['required', 'date'],
             'paid_date' => ['nullable', 'date'],
+            'products' => ['required', 'string']
         ];
     }
 }
