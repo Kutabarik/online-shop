@@ -26,18 +26,16 @@ class UpdateOrderRequest extends FormRequest
 
         if ($method === 'PUT') {
             return [
-                'user_id' => ['required', 'integer', 'exists:users,id'],
+                'name' => ['required', 'string', 'min:3', 'max:100'],
                 'street' => ['required', 'string', 'max:100'],
-                'total' => ['required', 'numeric', 'min:0'],
                 'status' => ['required', 'string', Rule::in(['billed', 'paid', 'void'])],
                 'billed_date' => ['required', 'date'],
                 'paid_date' => ['nullable', 'date'],
             ];
         } else {
             return [
-                'user_id' => ['sometimes', 'required', 'integer', 'exists:users,id'],
+                'name' => ['required', 'string', 'min:3', 'max:100'],
                 'street' => ['sometimes', 'required', 'string', 'max:100'],
-                'total' => ['sometimes', 'required', 'numeric', 'min:0'],
                 'status' => ['sometimes', 'required', 'string', Rule::in(['billed', 'paid', 'void'])],
                 'billed_date' => ['sometimes', 'required', 'date'],
                 'paid_date' => ['sometimes', 'nullable', 'date'],

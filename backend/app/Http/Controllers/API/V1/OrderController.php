@@ -10,6 +10,7 @@ use App\Http\Resources\V1\OrderCollection;
 use App\Http\Resources\V1\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
@@ -45,7 +46,7 @@ class OrderController extends Controller
     {
         $order = Order::create($request->validated());
 
-        return response()->json($order, 201);
+        return response()->json($order, 201)->header('Content-Type', 'application/json');
     }
 
     /**

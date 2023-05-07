@@ -21,9 +21,8 @@ class OrderFactory extends Factory
         $status = fake()->randomElement(['billed', 'paid', 'void']);
 
         return [
-            'user_id' => User::factory(),
+            'name' => fake()->name(),
             'street' => fake()->streetAddress(),
-            'total' => fake()->numberBetween(10, 100000),
             'status' => $status,
             'billed_date' => fake()->dateTimeThisDecade(),
             'paid_date' => $status === 'paid' ? fake()->dateTimeThisDecade() : NULL,
